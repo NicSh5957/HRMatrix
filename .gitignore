@@ -198,3 +198,4 @@ obj
 /src/KaraokeCloud.Api/.config
 *.mp3
 *.mp4
+*.tar
