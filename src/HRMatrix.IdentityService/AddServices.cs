@@ -3,7 +3,6 @@ using HRMatrix.Application.Interfaces;
 using HRMatrix.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -14,7 +13,6 @@ namespace HRMatrix.IdentityService
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
-            // Config Identity
             services.Configure<IdentityOptions>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -47,7 +45,7 @@ namespace HRMatrix.IdentityService
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ClockSkew = TimeSpan.Zero // set ClockSkew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                    ClockSkew = TimeSpan.Zero
                 };
             });
 

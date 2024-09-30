@@ -28,3 +28,5 @@ ENTRYPOINT ["dotnet", "HRMatrix.Api.dll"]
 #PS C:\Reps\HRMatrix\src\HRMatrix.Api> cd C:\Reps\HRMatrix
 #docker build -t hommel5957/hrmatrix:latest_dev -f ./src/HRMatrix.Api/Dockerfile .
 #docker push hommel5957/hrmatrix:latest_dev
+#docker pull hommel5957/hrmatrix:latest_dev
+#docker run -d --name hrmatrix_app --network hrmatrix-network -p 5000:8080 -e ASPNETCORE_ENVIRONMENT=Development --restart=always hommel5957/hrmatrix:latest_dev

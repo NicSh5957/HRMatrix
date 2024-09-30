@@ -22,6 +22,574 @@ namespace HRMatrix.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("HRMatrix.Domain.Entities.EducationLevel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EducationLevels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Высшее законченное (Магистр)"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Среднее специальное / профессиональное"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Кандидат наук"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Доктор наук"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Доцент"
+                        });
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.EducationLevelTranslation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EducationLevelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LanguageCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EducationLevelId");
+
+                    b.ToTable("EducationLevelTranslations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EducationLevelId = 1,
+                            LanguageCode = "ru-RU",
+                            Name = "Высшее законченное (Магистр)"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EducationLevelId = 1,
+                            LanguageCode = "en-US",
+                            Name = "Higher Education (Master)"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EducationLevelId = 1,
+                            LanguageCode = "ky-KG",
+                            Name = "Жогорку билим (Магистр)"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EducationLevelId = 2,
+                            LanguageCode = "ru-RU",
+                            Name = "Среднее специальное / профессиональное"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EducationLevelId = 2,
+                            LanguageCode = "en-US",
+                            Name = "Specialized Secondary / Professional"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EducationLevelId = 2,
+                            LanguageCode = "ky-KG",
+                            Name = "Орточо кесиптик билим"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EducationLevelId = 3,
+                            LanguageCode = "ru-RU",
+                            Name = "Кандидат наук"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EducationLevelId = 3,
+                            LanguageCode = "en-US",
+                            Name = "Candidate of Sciences"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EducationLevelId = 3,
+                            LanguageCode = "ky-KG",
+                            Name = "Илим кандидаты"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            EducationLevelId = 4,
+                            LanguageCode = "ru-RU",
+                            Name = "Доктор наук"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            EducationLevelId = 4,
+                            LanguageCode = "en-US",
+                            Name = "Doctor of Sciences"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            EducationLevelId = 4,
+                            LanguageCode = "ky-KG",
+                            Name = "Илим доктору"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            EducationLevelId = 5,
+                            LanguageCode = "ru-RU",
+                            Name = "Доцент"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            EducationLevelId = 5,
+                            LanguageCode = "en-US",
+                            Name = "Associate Professor"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            EducationLevelId = 5,
+                            LanguageCode = "ky-KG",
+                            Name = "Ассистент профессор"
+                        });
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.FamilyStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MaritalStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MarriagePeriods")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("NumberOfChildren")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TimesMarried")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserProfileId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaritalStatusId");
+
+                    b.HasIndex("UserProfileId")
+                        .IsUnique();
+
+                    b.ToTable("FamilyStatuses");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("UserProfileId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserProfileId");
+
+                    b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Английский"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Турецкий"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Немецкий"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Китайский"
+                        });
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.LanguageTranslation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("LanguageCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("LanguageTranslations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            LanguageCode = "en-US",
+                            LanguageId = 1,
+                            Name = "English"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            LanguageCode = "ru-RU",
+                            LanguageId = 1,
+                            Name = "Английский"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            LanguageCode = "en-US",
+                            LanguageId = 2,
+                            Name = "Turkish"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            LanguageCode = "ru-RU",
+                            LanguageId = 2,
+                            Name = "Турецкий"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            LanguageCode = "en-US",
+                            LanguageId = 3,
+                            Name = "German"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            LanguageCode = "ru-RU",
+                            LanguageId = 3,
+                            Name = "Немецкий"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            LanguageCode = "en-US",
+                            LanguageId = 4,
+                            Name = "Chinese"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            LanguageCode = "ru-RU",
+                            LanguageId = 4,
+                            Name = "Китайский"
+                        });
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.MaritalStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaritalStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Женат/Замужем"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Холост/Не замужем"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Разведен(а)"
+                        });
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.MaritalStatusTranslation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("LanguageCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("MaritalStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaritalStatusId");
+
+                    b.ToTable("MaritalStatusTranslations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            LanguageCode = "en-US",
+                            MaritalStatusId = 1,
+                            Name = "Married"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            LanguageCode = "ky-KG",
+                            MaritalStatusId = 1,
+                            Name = "Күйөөм (Замужем)"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            LanguageCode = "en-US",
+                            MaritalStatusId = 2,
+                            Name = "Single"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            LanguageCode = "ky-KG",
+                            MaritalStatusId = 2,
+                            Name = "Бекар"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            LanguageCode = "en-US",
+                            MaritalStatusId = 3,
+                            Name = "Divorced"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            LanguageCode = "ky-KG",
+                            MaritalStatusId = 3,
+                            Name = "Ажыратылган"
+                        });
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.UserEducation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EducationLevelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserProfileId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EducationLevelId");
+
+                    b.HasIndex("UserProfileId");
+
+                    b.ToTable("UserEducations");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.UserProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AdditionalCompetences")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("AdditionalSkills")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("MaritalStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProfilePhotoPath")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("VideoPath")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaritalStatusId");
+
+                    b.ToTable("UserProfiles");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.WorkExperience", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Achievements")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserProfileId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserProfileId");
+
+                    b.ToTable("WorkExperiences");
+                });
+
             modelBuilder.Entity("HRMatrix.IdentityService.Models.ApplicationRole", b =>
                 {
                     b.Property<int>("Id")
@@ -174,15 +742,15 @@ namespace HRMatrix.Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b53e5a87-25b3-41af-8511-c10c5c291e43",
+                            ConcurrencyStamp = "f8e842c3-c9e7-4224-8412-a160fea84987",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@MAIL.COM",
                             NormalizedUserName = "USER",
-                            PasswordHash = "AQAAAAIAAYagAAAAECCqU1bS/uCIWKrpwW9g+nL0SC63rXnm+1UbUR7/J8jQ6V7hleaKmegQSoRR5KKG8A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOHYhQ3iERe7MagPAALysXWAVNrIO/T5zw2pdQrtFcOu4gV+bI38s7Oec/pFxApJwg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "91cd1886-ef38-4c8a-9870-abf420ce5d1e",
+                            SecurityStamp = "597da158-b987-4997-acda-2701b9473566",
                             TwoFactorEnabled = false,
                             UserName = "user"
                         },
@@ -190,15 +758,15 @@ namespace HRMatrix.Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "708ab15d-404b-4b61-85d8-30e72a78ba8b",
+                            ConcurrencyStamp = "23f82e97-378b-44ee-b43a-9cb8f213b064",
                             Email = "superuser@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERUSER@MAIL.COM",
                             NormalizedUserName = "SUPERUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFZr6KmFDE3Jdresql7YaoerXRPwv6CiuVfe1Pktj3OiwtY2sgtJAzyt7UGTkuoqiQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHqsxqd9baFFkD6AlD0Cf/cEdJZSnwe2cJuBz+a0K+wDg3WyCGxZEYftNK0bSAYUpg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "12ee852e-1279-4d11-8324-39d468d3987f",
+                            SecurityStamp = "a12462b0-13cc-4a3c-a895-929d42d5b513",
                             TwoFactorEnabled = false,
                             UserName = "superuser"
                         },
@@ -206,15 +774,15 @@ namespace HRMatrix.Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "631511ff-7fe9-46cd-9c36-dec0432bc835",
+                            ConcurrencyStamp = "61d7d215-77d1-49c5-962f-98f52a2d342b",
                             Email = "hr@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "HR@MAIL.COM",
                             NormalizedUserName = "HR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIuZPvz6yXi9JGWFUJikZ5ibkQUv9yEM1Mtqd0wjT1ECVhOY548ph44cWusYd+Vtgw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIZtXw0OLkom1CAE+RA4ZB7e759qnuElfUujNsFwjbwLGzElD6rnsRkkk6T1QPTlgg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f412ab00-6219-40a3-84dc-5099fba80afa",
+                            SecurityStamp = "5b7819a5-49a0-4baa-956c-7e1198a05aaa",
                             TwoFactorEnabled = false,
                             UserName = "hr"
                         },
@@ -222,15 +790,15 @@ namespace HRMatrix.Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f8483724-5933-41e5-b386-83ec294547b1",
+                            ConcurrencyStamp = "59d279f4-ab46-4abc-bea7-41b644bf9e47",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFU7dvGeuYRdHwMGBTjlHOtBh+3YZ9XsWchi5IsGeFOD8Saq58M5tCeepxhkgvpyXA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB7ov5GzgrhYfNfl+7TtQ8A2/c/9kVMloIC810tNvWPgUOFZ0MS/NqHj0+sdv2cGSw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "70665583-abd0-40be-98ef-ed12c99b0988",
+                            SecurityStamp = "36f1ab0a-3b5f-43f9-9cd7-87de186007b0",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -337,6 +905,102 @@ namespace HRMatrix.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HRMatrix.Domain.Entities.EducationLevelTranslation", b =>
+                {
+                    b.HasOne("HRMatrix.Domain.Entities.EducationLevel", "EducationLevel")
+                        .WithMany("Translations")
+                        .HasForeignKey("EducationLevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EducationLevel");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.FamilyStatus", b =>
+                {
+                    b.HasOne("HRMatrix.Domain.Entities.MaritalStatus", "MaritalStatus")
+                        .WithMany()
+                        .HasForeignKey("MaritalStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRMatrix.Domain.Entities.UserProfile", "UserProfile")
+                        .WithOne("FamilyStatus")
+                        .HasForeignKey("HRMatrix.Domain.Entities.FamilyStatus", "UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MaritalStatus");
+
+                    b.Navigation("UserProfile");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.Language", b =>
+                {
+                    b.HasOne("HRMatrix.Domain.Entities.UserProfile", null)
+                        .WithMany("UserLanguages")
+                        .HasForeignKey("UserProfileId");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.LanguageTranslation", b =>
+                {
+                    b.HasOne("HRMatrix.Domain.Entities.Language", "Language")
+                        .WithMany("Translations")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.MaritalStatusTranslation", b =>
+                {
+                    b.HasOne("HRMatrix.Domain.Entities.MaritalStatus", "MaritalStatus")
+                        .WithMany()
+                        .HasForeignKey("MaritalStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MaritalStatus");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.UserEducation", b =>
+                {
+                    b.HasOne("HRMatrix.Domain.Entities.EducationLevel", "EducationLevel")
+                        .WithMany()
+                        .HasForeignKey("EducationLevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRMatrix.Domain.Entities.UserProfile", "UserProfile")
+                        .WithMany("UserEducations")
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EducationLevel");
+
+                    b.Navigation("UserProfile");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.UserProfile", b =>
+                {
+                    b.HasOne("HRMatrix.Domain.Entities.MaritalStatus", null)
+                        .WithMany("UserProfiles")
+                        .HasForeignKey("MaritalStatusId");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.WorkExperience", b =>
+                {
+                    b.HasOne("HRMatrix.Domain.Entities.UserProfile", "UserProfile")
+                        .WithMany("WorkExperiences")
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserProfile");
+                });
+
             modelBuilder.Entity("HRMatrix.IdentityService.Models.ApplicationRoleClaim", b =>
                 {
                     b.HasOne("HRMatrix.IdentityService.Models.ApplicationRole", null)
@@ -386,6 +1050,33 @@ namespace HRMatrix.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.EducationLevel", b =>
+                {
+                    b.Navigation("Translations");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.Language", b =>
+                {
+                    b.Navigation("Translations");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.MaritalStatus", b =>
+                {
+                    b.Navigation("UserProfiles");
+                });
+
+            modelBuilder.Entity("HRMatrix.Domain.Entities.UserProfile", b =>
+                {
+                    b.Navigation("FamilyStatus")
+                        .IsRequired();
+
+                    b.Navigation("UserEducations");
+
+                    b.Navigation("UserLanguages");
+
+                    b.Navigation("WorkExperiences");
                 });
 #pragma warning restore 612, 618
         }
